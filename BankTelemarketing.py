@@ -43,7 +43,7 @@ def main():
         
 
         #imagem = Image.open(".\img\Bank-Branding.jpg")
-        st.sidebar.image(imagem)
+        #st.sidebar.image(imagem)
 
         upload = st.sidebar.file_uploader('Faça upload do arquivo:')
 
