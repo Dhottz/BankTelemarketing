@@ -42,7 +42,7 @@ def main():
         st.subheader('Nessa aplicação estamos fazendo análises de receptividade de telemarketing com dados de clientes de um banco.')
         
 
-        imagem = Image.open(".\img\Bank-Branding.jpg")
+        #imagem = Image.open(".\img\Bank-Branding.jpg")
         st.sidebar.image(imagem)
 
         upload = st.sidebar.file_uploader('Faça upload do arquivo:')
