@@ -7,6 +7,7 @@ from PIL                 import Image
 from io                  import BytesIO
 
 
+
 @st.cache_data(show_spinner=True)
 def ler_dados(arquivo):
         try:
@@ -26,7 +27,7 @@ def to_excel(df):
     output = BytesIO()
     writer = pd.ExcelWriter(output)
     df.to_excel(writer, index=False, sheet_name='Sheet1')
-    writer.save()
+    writer.close()
     processed_data = output.getvalue()
     return processed_data
 
@@ -42,8 +43,8 @@ def main():
         st.subheader('Nessa aplicação estamos fazendo análises de receptividade de telemarketing com dados de clientes de um banco.')
         
 
-        #imagem = Image.open(".\img\Bank-Branding.jpg")
-        #st.sidebar.image(imagem)
+        imagem = Image.open(".\img\Bank-Branding.jpg")
+        st.sidebar.image(imagem)
 
         upload = st.sidebar.file_uploader('Faça upload do arquivo:')
 
@@ -174,7 +175,7 @@ def main():
                 # PLOTS    
                 if graph_type == 'Barras':
                         sns.barplot(x = df_raw_target_perc.index, 
-                                y = 'y',
+                                y = 'proportion',
                                 data = df_raw_target_perc, 
                                 ax = ax[0])
                         ax[0].bar_label(ax[0].containers[0])
@@ -182,18 +183,18 @@ def main():
                                 fontweight ="bold")
                 
                         sns.barplot(x = df_target_perc.index, 
-                                y = 'y', 
+                                y = 'proportion', 
                                 data = df_target_perc, 
                                 ax = ax[1])
                         ax[1].bar_label(ax[1].containers[0])
                         ax[1].set_title('Dados filtrados',
                                 fontweight ="bold")
                 else:
-                        df_raw_target_perc.plot(kind='pie', autopct='%.2f', y='y', ax = ax[0])
+                        df_raw_target_perc.plot(kind='pie', autopct='%.2f', y='proportion', ax = ax[0])
                         ax[0].set_title('Dados brutos',
                                 fontweight ="bold")
                 
-                        df_target_perc.plot(kind='pie', autopct='%.2f', y='y', ax = ax[1])
+                        df_target_perc.plot(kind='pie', autopct='%.2f', y='proportion', ax = ax[1])
                         ax[1].set_title('Dados filtrados',
                                 fontweight ="bold")
 
